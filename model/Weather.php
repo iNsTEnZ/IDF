@@ -2,12 +2,12 @@
 
 require_once("YahooApi.php");
 
-class Finance extends YahooApi
+class Weather extends YahooApi
 {
 
-  public function getQuateFor($stock)
+  public function getWeatherFor($location)
   {
-    $yql_query = "select * from yahoo.finance.quote where symbol in ($stock)";
+    $yql_query = "select * from wunderground.forecast where location=$location";
     $yql_query_url = $this->BASE_URL . "?q=" . urlencode($yql_query) . "&format=json&env=store://datatables.org/alltableswithkeys";
 
     // Make call with cURL
