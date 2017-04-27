@@ -2,11 +2,11 @@
 
 require_once("YahooApi.php");
 
-class Weather extends YahooApi
+class Books extends YahooApi
 {
-  public function getWeatherFor($location)
+  public function getBookFromName($bookName)
   {
-    $yql_query = "select * from wunderground.forecast where location=$location";
+    $yql_query = "SELECT * FROM google.books WHERE q=$bookName";
     $yql_query_url = $this->BASE_URL . "?q=" . urlencode($yql_query) . "&format=json&env=store://datatables.org/alltableswithkeys";
 	
     // Make call with cURL

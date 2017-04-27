@@ -1,6 +1,7 @@
 <?php
 require_once("model/Finance.php");
 require_once("model/Weather.php");
+require_once("model/Books.php");
 
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD'];
@@ -11,26 +12,34 @@ if ($request != null) {
 
   $path = join("/", $request);
 
-  switch ($method) {
+  switch ($method) 
+  {
     case 'GET':
-      switch ($path) {
+      switch ($path) 
+	  {
         case 'api/finance':
-
-          if ($_GET['stock'] != null) {
-            $finance = new Finance();
-            $finance->getQuateFor('"' . $_GET['stock'] . '"');
-          }
-
-          break;
+			if ($_GET['stock'] != null) 
+			{
+				$finance = new Finance();
+				$finance->getQuateFor('"' . $_GET['stock'] . '"');
+			}
+			break;
 
         case 'api/weather':
-
-          if ($_GET['location'] != null) {
-            $weather = new Weather();
-            $weather->getWeatherFor('"' . $_GET['location'] . '"');
-          }
-
-          break;
+			if ($_GET['location'] != null) 
+			{
+				$weather = new Weather();
+				$weather->getWeatherFor('"' . $_GET['location'] . '"');
+			}
+			break;
+			
+		case 'api/books':
+			if ($_GET['bookName'] != null) 
+			{
+				$book = new Books();
+				$book->getBookFromName('"' . $_GET['bookName'] . '"');
+			}
+			break;
       }
       break;
     case 'PUT':
