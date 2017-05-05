@@ -2,6 +2,7 @@
 require_once("model/Finance.php");
 require_once("model/Weather.php");
 require_once("model/Books.php");
+require_once("model/Time.php");
 
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD'];
@@ -38,6 +39,13 @@ if ($request != null) {
 			{
 				$book = new Books();
 				$book->getBookFromName('"' . $_GET['bookName'] . '"');
+			}
+			break;
+		case 'api/time':
+			if ($_GET['location'] != null) 
+			{
+				$book = new Time();
+				$book->getTime('"' . $_GET['location'] . '"');
 			}
 			break;
       }
