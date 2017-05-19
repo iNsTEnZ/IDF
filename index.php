@@ -13,13 +13,13 @@ if ($request != null) {
 
   $path = join("/", $request);
 
-  switch ($method) 
+  switch ($method)
   {
     case 'GET':
-      switch ($path) 
+      switch ($path)
 	  {
         case 'api/finance':
-			if ($_GET['stock'] != null) 
+			if ($_GET['stock'] != null)
 			{
 				$finance = new Finance();
 				$finance->getQuateFor('"' . $_GET['stock'] . '"');
@@ -27,25 +27,25 @@ if ($request != null) {
 			break;
 
         case 'api/weather':
-			if ($_GET['location'] != null) 
+			if ($_GET['location'] != null)
 			{
 				$weather = new Weather();
 				$weather->getWeatherFor('"' . $_GET['location'] . '"');
 			}
 			break;
-			
+
 		case 'api/books':
-			if ($_GET['bookName'] != null) 
+			if ($_GET['bookName'] != null)
 			{
 				$book = new Books();
 				$book->getBookFromName('"' . $_GET['bookName'] . '"');
 			}
 			break;
 		case 'api/time':
-			if ($_GET['location'] != null) 
+			if ($_GET['location'] != null)
 			{
-				$book = new Time();
-				$book->getTime('"' . $_GET['location'] . '"');
+				$time = new Time();
+				$time->getTime($_GET['location']);
 			}
 			break;
       }
