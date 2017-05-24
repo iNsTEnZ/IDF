@@ -27,7 +27,7 @@ if ($request != null) {
     			if ($_GET['location'] != null)
     			{
     				$weather = new Weather();
-    				$weather->getWeatherFor('"' . $_GET['location'] . '"');
+    				$weather->getWeatherFor('"' . $_GET['location'] . '"','"' . $_GET['u'] . '"');
     			}
     			break;
     		case 'api/books':
