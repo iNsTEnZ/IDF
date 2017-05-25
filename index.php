@@ -3,12 +3,12 @@ require_once("model/Finance.php");
 require_once("model/Weather.php");
 require_once("model/Books.php");
 require_once("model/Time.php");
-require_once("DAL/MongodbFunctions.php");
+//require_once("DAL/MongodbFunctions.php");
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
-$mongodb = MongodbFunctions::getInstance();
+//$mongodb = MongodbFunctions::getInstance();
 if ($request != null) {
   $path = join("/", $request);
   switch ($method)
