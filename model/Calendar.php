@@ -47,5 +47,9 @@ class Calendar
 
         return $response;
     }
-}
 
+    public function getRoutingData()
+    {
+      return null;
+    }
+}

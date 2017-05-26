@@ -18,6 +18,11 @@ class Finance extends YahooApi
     $phpObj =  json_decode($json);
     echo "<pre>", var_dump($phpObj), "</pre>";
   }
+
+  public function getRoutingData()
+  {
+    return ['GET:api/finance' => function() { $this->getQuateFor('"' . $_GET['stock'] . '"'); }];
+  }
 }
 
 ?>

@@ -2,15 +2,9 @@
 
   require_once("DAL/iDBFunctions.php");
 
-  class MongodbFunctions implements iDBFunctions
+  class MongodbFunctions extends iDBFunctions
   {
-    private static $instance = null;
     private $connection;
-
-    private function __construct()
-    {
-      $this->initialize();
-    }
 
     public static function getInstance()
     {
@@ -53,6 +47,3 @@
       $result = $this->connection->executeBulkWrite('project.' . $collectionName, $bulk, $writeConcern);
     }
   }
-
-
- ?>

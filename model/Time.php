@@ -29,6 +29,11 @@ class Time
 
    echo "<pre>", date_format($t, "d/m/Y G:i:s"), "</pre>";
   }
+
+  public function getRoutingData()
+  {
+    return ['GET:api/time' => function() { $this->getTime($_GET['location']); }];
+  }
 }
 
 ?>
