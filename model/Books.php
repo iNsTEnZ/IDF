@@ -15,5 +15,9 @@ class Books extends YahooApi
     $json = curl_exec($session);
     echo $json; 
   }
+
+  public function getRoutingData()
+  {
+      return ['GET:api/books' => function() { $this->getBookFromName('"' . $_GET['bookName'] . '"'); }];
+  }
 }
-?>
