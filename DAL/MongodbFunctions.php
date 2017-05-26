@@ -24,26 +24,35 @@
 
     public function readData($collectionName)
     {
-      // Get all data from the collection
-      $cursor = $this->connection->executeQuery('project.' . $collectionName, new MongoDB\Driver\Query([]));
+      try {
+        // Get all data from the collection
+        $cursor = $this->connection->executeQuery('project.' . $collectionName, new MongoDB\Driver\Query([]));
 
-      // Print all data from collection
-      foreach ($cursor as $document)
-      {
-        echo $document . "\n";
+        // Print all data from collection
+        foreach ($cursor as $document)
+        {
+          echo json_encode($document);
+        }
+      } catch(MongoDB\Driver\Exception\Exception $e) {
+        echo $e->getMessage();
       }
     }
 
     public function writeData($collectionName, $data)
     {
-      // The write object (buffer)
-      $bulk = new MongoDB\Driver\BulkWrite();
+      try {
+        // The write object (buffer)
+        $bulk = new MongoDB\Driver\BulkWrite();
 
-      // Write to the buffer
-      $bulk->insert($data);
+        // Write to the buffer
+        $bulk->insert($data);
 
-      // Commit the write to the db
-      $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
-      $result = $this->connection->executeBulkWrite('project.' . $collectionName, $bulk, $writeConcern);
+        // Commit the write to the db
+        $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
+        $result = $this->connection->executeBulkWrite('project.' . $collectionName, $bulk, $writeConcern);
+        echo json_encode($result);
+      } catch(MongoDB\Driver\Exception\Exception $e) {
+        echo $e->getMessage();
+      }
     }
   }
