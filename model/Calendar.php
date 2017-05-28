@@ -3,53 +3,38 @@ namespace HolidayAPI;
 
 class Calendar
 {
-    private $parameters = array();
-
-    public function __set($variable, $value)
-    {
-        $this->parameters[$variable] = $value;
-    }
-
-    public function __construct($key = null)
-    {
-        if ($key) {
-            $this->key = $key;
-        }
-    }
+    private $parameters = ['key' => '6cfd72bd-7bc5-44c7-adfa-645f4b4e0985'];
 
     public function holidays($parameters = array())
     {
         $parameters = array_merge($this->parameters, $parameters);
         $parameters = http_build_query($parameters);
 
-        $url  = 'https://holidayapi.com/v1/holidays?' . $parameters;
+        $url = 'https://holidayapi.com/v1/holidays?'. $parameters;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL            => $url,
-            CURLOPT_HEADER         => false,
-            CURLOPT_SSL_VERIFYPEER => true,
-            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL             => $url,
+            CURLOPT_HEADER          => false,
+            CURLOPT_RETURNTRANSFER  => true,
         ));
 
         $response = curl_exec($curl);
 
-        if ($error = curl_error($curl)) {
-            return false;
+        if ($error = curl_error($curl)){
+            return $error;
         }
 
         curl_close($curl);
         $response = json_decode($response, true);
 
-        if (!$response) {
+        if (!$response){
             return false;
         }
 
         return $response;
     }
-
-    public function getRoutingData()
-    {
-      return null;
-    }
 }
+$cal = new Calendar();
+var_dump($cal -> holidays(['country'=>'IL', 'year'=>2017]));
+?>
