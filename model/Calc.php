@@ -1,6 +1,6 @@
 <?php
 require_once("YahooApi.php");
-class calc extends YahooApi
+class Calc extends YahooApi
 {
   public function calcExpression($expr)
   {
