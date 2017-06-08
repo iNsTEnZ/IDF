@@ -7,6 +7,7 @@ require_once("model/Time.php");
 require_once("model/iHTTPRequest.php");
 require_once("model/WordOfDay.php");
 require_once("model/Calc.php");
+require_once("model/Calendar.php");
 class HTTPRouter
 {
   private $factory = [];

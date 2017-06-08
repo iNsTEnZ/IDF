@@ -1,7 +1,6 @@
 <?php
-namespace HolidayAPI;
 
-class Calendar
+class Calendar implements iHTTPRequest
 {
     private $parameters = array();
 

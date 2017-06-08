@@ -25,7 +25,7 @@ class WordOfDay implements iHTTPRequest
               }
             },
 
-            'POST:api/WordOfDay' => function() {
+            'POST:api/wordofday' => function() {
               $data = ['title' => $_GET['title']];
               $this->mongodb->writeData("WordOfDay", $data);
             }
