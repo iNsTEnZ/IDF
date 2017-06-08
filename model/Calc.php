@@ -1,5 +1,8 @@
 <?php
-class Calc
+
+require_once("YahooApi.php");
+
+class Calc extends YahooApi
 {
   public function calcExpression($operator,$fvalue,$lvalue)
   {
