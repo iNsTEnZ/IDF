@@ -1,19 +1,41 @@
 <?php
+
 require_once("YahooApi.php");
+
 class Calc extends YahooApi
 {
-  public function calcExpression($expr)
+  public function calcExpression($operator,$fvalue,$lvalue)
   {
-	$url = "http://www.calcatraz.com/calculator/api?c=" . urlencode($expr);
+	$operator=$_REQUEST['operator'];
+	if($operator=="+")
+	{
+	$add1 = $fvalue;
+	$add2 = $lvalue;
+	$res= $add1+$add2;
+	}
+	if($operator=="-")
+	{
+	$add1 = $fvalue;
+	$add2 = $lvalue;
+	$res= $add1-$add2;
+	}
+	if($operator=="*")
+	{
+	$add1 = $fvalue;
+	$add2 = $lvalue;
+	$res =$add1*$add2;
+	}
+	if($operator=="/")
+	{
+	$add1 = $fvalue;
+	$add2 = $lvalue;
+	$res= $add1/$add2;
+	}
 	
-    // Make call with cURL
-    $session = curl_init($url);
-    curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
-    $json = curl_exec($session);
-    echo $json; 
+	echo $res
   }
   public function getRoutingData()
   {
-      return ['GET:api/calc' => function() { $this->calcExpression('"' . $_GET['expr'] . '"'); }];
+      return ['GET:api/calc' => function() { $this->calcExpression('"' . $_GET['operator'] . '"',$_GET['fvalue'],$_GET['lvalue']); }];
   }
 }
