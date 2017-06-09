@@ -1,38 +1,39 @@
 <?php
 
-class Time
+class Time implements iHTTPRequest
 {
 
-  public function getTime($location)
+  private $mongodb;
+
+  public function __construct()
   {
-	  $t = date_create("Asia/Jerusalem");
-
-    switch ($location) {
-     case 'israel':
-    	break;
-     case 'iran':
-    	date_add($t, date_interval_create_from_date_string("+ 2 hours"));
-    	break;
-     case 'germany':
-    	date_sub($t, date_interval_create_from_date_string("+ 1 hours"));
-    	break;
-     case 'usa':
-    	date_sub($t, date_interval_create_from_date_string("+ 7 hours"));
-    	break;
-     case 'brazil':
-    	date_sub($t, date_interval_create_from_date_string("+ 5 hours"));
-    	break;
-     case 'chine':
-    	date_add($t, date_interval_create_from_date_string("+ 6 hour"));
-    	break;
-   }
-
-   echo "<pre>", date_format($t, "d/m/Y G:i:s"), "</pre>";
+    $this->mongodb = MongodbFunctions::getInstance();
   }
 
   public function getRoutingData()
   {
-    return ['GET:api/time' => function() { $this->getTime($_GET['location']); }];
+    return [
+            'GET:api/time' => function() {
+
+              // Get data for a spesific timezone
+              $cursor = $this->mongodb->queryData("Time", ['location' => $_GET['location']]);
+
+              // Print all data from collection
+              foreach ($cursor as $document)
+              {
+                $current = new DateTime(gmdate("d.m.Y G:i:s"));
+                date_add($current, date_interval_create_from_date_string($document->offset . " hour"));
+                echo json_encode(date_format($current, "d.m.Y G:i:s"));
+              }
+            },
+
+            'POST:api/time' => function() {
+              if ($_GET['offset'] != null && $_GET['location'] != null) {
+                $data = ['offset' => $_GET['offset'], 'location' => $_GET['location']];
+                $this->mongodb->writeData("Time", $data);
+              }
+            }
+           ];
   }
 }
 
