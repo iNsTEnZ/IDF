@@ -15,8 +15,15 @@ class Time implements iHTTPRequest
     return [
             'GET:api/time' => function() {
 
-              // Get data for a spesific timezone
-              $cursor = $this->mongodb->queryData("Time", ['location' => $_GET['location']]);
+              $cursor = null;
+
+              if (array_key_exists('location', $_GET)) {
+                // Get data for a spesific timezone
+                $cursor = $this->mongodb->queryData("Time", ['location' => $_GET['location']]);
+              } else {
+                // Get data for all timezones
+                $cursor = $this->mongodb->readData("Time");
+              }
 
               // Print all data from collection
               foreach ($cursor as $document)
@@ -28,7 +35,7 @@ class Time implements iHTTPRequest
             },
 
             'POST:api/time' => function() {
-              if ($_GET['offset'] != null && $_GET['location'] != null) {
+              if (array_key_exists('offset', $_GET) && array_key_exists('location', $_GET)) {
                 $data = ['offset' => $_GET['offset'], 'location' => $_GET['location']];
                 $this->mongodb->writeData("Time", $data);
               }

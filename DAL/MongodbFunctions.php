@@ -19,7 +19,8 @@
     public function initialize()
     {
       // Create a connection to Mongodb
-      $this->connection = new MongoDB\Driver\Manager("mongodb://172.30.123.76:27017");
+      $this->connection = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+      //$this->connection = new MongoDB\Driver\Manager("mongodb://172.30.123.76:27017");
     }
 
     public function readData($collectionName)
@@ -39,7 +40,7 @@
     {
       try {
         // Get all data from the collection
-        $cursor = $this->connection->executeQuery('project.' . $collectionName, new MongoDB\Driver\Query([]));
+        $cursor = $this->connection->executeQuery('project.' . $collectionName, new MongoDB\Driver\Query($query));
 
         return $cursor;
 
