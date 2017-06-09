@@ -20,14 +20,14 @@
     {
       // Create a connection to Mongodb
       //$this->connection = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-      $this->connection = new MongoDB\Driver\Manager("mongodb://172.30.123.76:27017");
+      $this->connection = new MongoDB\Driver\Manager("mongodb://sce:123456@ds113702.mlab.com:13702/sce");
     }
 
     public function readData($collectionName)
     {
       try {
         // Get all data from the collection
-        $cursor = $this->connection->executeQuery('project.' . $collectionName, new MongoDB\Driver\Query([]));
+        $cursor = $this->connection->executeQuery('sce.' . $collectionName, new MongoDB\Driver\Query([]));
 
         return $cursor;
 
@@ -40,7 +40,7 @@
     {
       try {
         // Get all data from the collection
-        $cursor = $this->connection->executeQuery('project.' . $collectionName, new MongoDB\Driver\Query($query));
+        $cursor = $this->connection->executeQuery('sce.' . $collectionName, new MongoDB\Driver\Query($query));
 
         return $cursor;
 
@@ -60,7 +60,7 @@
 
         // Commit the write to the db
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
-        $result = $this->connection->executeBulkWrite('project.' . $collectionName, $bulk, $writeConcern);
+        $result = $this->connection->executeBulkWrite('sce.' . $collectionName, $bulk, $writeConcern);
         echo json_encode($result);
       } catch(MongoDB\Driver\Exception\Exception $e) {
         echo $e->getMessage();
