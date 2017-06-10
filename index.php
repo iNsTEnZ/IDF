@@ -4,7 +4,6 @@ require_once("model/Weather.php");
 require_once("model/Books.php");
 require_once("model/Time.php");
 require_once("model/WordOfDay.php");
-require_once("model/Calc.php");
 require_once("model/Calendar.php");
 require_once("model/Calculator.php");
 require_once("HTTPRouter.php");
