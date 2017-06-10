@@ -37,12 +37,15 @@ class Time implements iHTTPRequest
             'GET:api/time/locations' => function() {
 
               $cursor = $this->mongodb->readData("Time");
+              $result = [];
 
               // Print all data from collection
               foreach ($cursor as $document)
               {
-                echo json_encode($document->location);
+                array_push($result, $document->location);
               }
+
+              echo json_encode($result);
             },
 
             'POST:api/time' => function() {
