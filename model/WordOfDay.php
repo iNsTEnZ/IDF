@@ -17,12 +17,12 @@ class WordOfDay implements iHTTPRequest
     return [
             'GET:api/wordofday' => function() {
               $cursor = $this->mongodb->readData("WordOfDay");
+              $array = $cursor->toArray();
 
-              // Print all data from collection
-              foreach ($cursor as $document)
-              {
-                echo json_encode($document);
-              }
+              $count = count($array);
+              $current = 0;
+
+              echo json_encode($array[rand(0, $count - 1)]);
             },
 
             'POST:api/wordofday' => function() {
