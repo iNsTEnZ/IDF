@@ -15,7 +15,7 @@ class WordOfDay implements iHTTPRequest
   public function getRoutingData()
   {
     return [
-            'GET:api/WordOfDay' => function() {
+            'GET:api/wordofday' => function() {
               $cursor = $this->mongodb->readData("WordOfDay");
 
               // Print all data from collection
