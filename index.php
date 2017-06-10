@@ -6,6 +6,7 @@ require_once("model/Time.php");
 require_once("model/WordOfDay.php");
 require_once("model/Calc.php");
 require_once("model/Calendar.php");
+require_once("model/Calculator.php");
 require_once("HTTPRouter.php");
 
 // get the HTTP method, path and body of the request
@@ -19,8 +20,8 @@ $router->addRoutingFor(new Weather());
 $router->addRoutingFor(new Books());
 $router->addRoutingFor(new Time());
 $router->addRoutingFor(new WordOfDay());
-$router->addRoutingFor(new Calc());
 $router->addRoutingFor(new Calendar());
+$router->addRoutingFor(new Calculator());
 
 if ($request != null) {
   $path = join("/", $request);
