@@ -34,6 +34,17 @@ class Time implements iHTTPRequest
               }
             },
 
+            'GET:api/time/locations' => function() {
+
+              $cursor = $this->mongodb->readData("Time");
+
+              // Print all data from collection
+              foreach ($cursor as $document)
+              {
+                echo json_encode($document->location);
+              }
+            },
+
             'POST:api/time' => function() {
               if (array_key_exists('offset', $_GET) && array_key_exists('location', $_GET)) {
                 $data = ['offset' => $_GET['offset'], 'location' => $_GET['location']];
