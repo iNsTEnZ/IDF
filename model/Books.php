@@ -1,8 +1,9 @@
 <?php
 
 require_once("YahooApi.php");
+require_once("iHTTPRequest.php");
 
-class Books extends YahooApi
+class Books extends YahooApi implements iHTTPRequest
 {
   public function getBookFromName($bookName)
   {

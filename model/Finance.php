@@ -1,8 +1,9 @@
 <?php
 
 require_once("YahooApi.php");
+require_once("iHTTPRequest.php");
 
-class Finance extends YahooApi
+class Finance extends YahooApi implements iHTTPRequest
 {
 
   public function getQuateFor($stock)
